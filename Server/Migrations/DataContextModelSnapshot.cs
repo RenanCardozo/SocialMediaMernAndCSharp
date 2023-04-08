@@ -26,26 +26,21 @@ namespace Server.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Venue")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");

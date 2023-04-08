@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Server.Models;
 using MediatR;
 using Server.Extensions;
+using Server.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<DataContext>(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();

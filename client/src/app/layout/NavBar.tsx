@@ -7,9 +7,10 @@ export default function NavBar() {
             <Container>
                 <Menu.Item as={NavLink} to='/' header>
                     <img src="/assets/GoldLogo-removebg-preview.png" alt="logo" style={{ marginRight: '10px' }} />
-                    FriendSpace
+                    Lions Den
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/activities' name="Activities" />
+                <Menu.Item as={NavLink} to='/errors' name="Errors" />
                 <Menu.Item>
                     <Button as={NavLink} to='/createActivity' positive content="Create Activity" />
                 </Menu.Item>

@@ -11,7 +11,7 @@ using Server.Models;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230403205353_FirstMigration")]
+    [Migration("20230408160045_FirstMigration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,26 +28,21 @@ namespace Server.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Venue")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");

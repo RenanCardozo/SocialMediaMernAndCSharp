@@ -1,5 +1,8 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Server.Application.Activities;
 using Server.Models;
 
 namespace Server.Extensions
@@ -22,6 +25,8 @@ namespace Server.Extensions
 
             services.AddMediatR(typeof(Server.Application.Activities.List.Handler).Assembly);
             services.AddAutoMapper(typeof(Server.Application.Core.MappingProfiles).Assembly);
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<Create>();
             return services;
         }
     }
