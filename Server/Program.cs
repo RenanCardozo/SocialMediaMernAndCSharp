@@ -3,13 +3,21 @@ using Server.Models;
 using MediatR;
 using Server.Extensions;
 using Server.Middleware;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Added connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddControllers();
+builder.Services.AddControllers(opt => {
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    opt.Filters.Add(new AuthorizeFilter(policy));
+});
 builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
+
 // Add MySQL connection
 builder.Services.AddDbContext<DataContext>(options =>
 {
@@ -26,6 +34,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 app.UseCors();
+app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
@@ -36,8 +45,9 @@ var services = scope.ServiceProvider;
 try
 {
     var context = services.GetRequiredService<DataContext>();
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
     await context.Database.MigrateAsync();
-    await Seed.SeedData(context);
+    await Seed.SeedData(context, userManager);
 }
 catch (Exception ex)
 {

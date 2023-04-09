@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Server.Models;
 using Server.Application.Activities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Server.Controllers
 {
@@ -12,6 +13,7 @@ namespace Server.Controllers
             return HandleResult(await Mediator.Send(new List.Query()));
         }
 
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> GetActivity(Guid id)
         {

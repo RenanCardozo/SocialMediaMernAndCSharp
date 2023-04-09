@@ -1,17 +1,36 @@
 #pragma warning disable CS8618
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 using Server;
 
 namespace Server.Models
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
+            if(!userManager.Users.Any())
+            {
+                var users = new List<AppUser>
+                {
+                    new AppUser{DisplayName = "Bob" , UserName = "bob", Email = "bob@test.com"},
+                    new AppUser{DisplayName = "Tom" , UserName = "tom", Email = "tom@test.com"},
+                    new AppUser{DisplayName = "Jane" , UserName = "jane", Email = "jane@test.com"},
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+
+            }
+
             if (context.Activities.Any()) return;
             
             var activities = new List<Activity>
             {
+
+
                 new Activity
                 {
                     Title = "Past Activity 1",
