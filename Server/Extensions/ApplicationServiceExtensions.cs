@@ -3,7 +3,9 @@ using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.Application.Activities;
+using Server.Infrastructure.Security;
 using Server.Models;
+using Server.Application.Interfaces;
 
 namespace Server.Extensions
 {
@@ -27,6 +29,9 @@ namespace Server.Extensions
             services.AddAutoMapper(typeof(Server.Application.Core.MappingProfiles).Assembly);
             services.AddFluentValidationAutoValidation();
             services.AddValidatorsFromAssemblyContaining<Create>();
+            services.AddHttpContextAccessor();
+            services.AddScoped<IUserAccessor, UserAccessor>();
+
             return services;
         }
     }

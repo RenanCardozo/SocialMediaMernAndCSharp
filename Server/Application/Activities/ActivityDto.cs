@@ -1,9 +1,10 @@
-#pragma warning disable CS8618
 using System.ComponentModel.DataAnnotations;
+using System;
+using Server.Application.Profiles;
 
-namespace Server.Models
+namespace Server.Application.Activities
 {
-    public class Activity
+    public class ActivityDto
     {
         [Key]
         public Guid Id { get; set; }
@@ -20,8 +21,10 @@ namespace Server.Models
 
         public string? Venue { get; set; }
 
+        public string HostUsername { get; set; }
+
         public bool isCancelled { get; set; }
 
-        public List<ActivityAttendee> Attendees { get; set; } = new List<ActivityAttendee>();
+        public ICollection<ProfileDto> Attendees { get; set; }
     }
 }

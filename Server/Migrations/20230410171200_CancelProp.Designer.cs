@@ -11,8 +11,8 @@ using Server.Models;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230409032712_SecondMigration]")]
-    partial class SecondMigration
+    [Migration("20230410171200_CancelProp")]
+    partial class CancelProp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -173,9 +173,30 @@ namespace Server.Migrations
                     b.Property<string>("Venue")
                         .HasColumnType("longtext");
 
+                    b.Property<bool>("isCancelled")
+                        .HasColumnType("tinyint(1)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Activities");
+                });
+
+            modelBuilder.Entity("Server.Models.ActivityAttendee", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<Guid>("ActivityId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("IsHost")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("AppUserId", "ActivityId");
+
+                    b.HasIndex("ActivityId");
+
+                    b.ToTable("ActivitiesAttendees");
                 });
 
             modelBuilder.Entity("Server.Models.AppUser", b =>
@@ -297,6 +318,35 @@ namespace Server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Server.Models.ActivityAttendee", b =>
+                {
+                    b.HasOne("Server.Models.Activity", "Activity")
+                        .WithMany("Attendees")
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Server.Models.AppUser", "AppUser")
+                        .WithMany("Activities")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Server.Models.Activity", b =>
+                {
+                    b.Navigation("Attendees");
+                });
+
+            modelBuilder.Entity("Server.Models.AppUser", b =>
+                {
+                    b.Navigation("Activities");
                 });
 #pragma warning restore 612, 618
         }
