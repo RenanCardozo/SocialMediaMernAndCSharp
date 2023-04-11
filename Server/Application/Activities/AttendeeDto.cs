@@ -1,8 +1,8 @@
-using Server.Models;
 
-namespace Server.Application.Profiles
+
+namespace Server.Application.Activities
 {
-    public class ProfileDto
+    public class AttendeeDto
     {
         public string Username { get; set; }
 
@@ -11,7 +11,5 @@ namespace Server.Application.Profiles
         public string Bio { get; set; }
 
         public string Image { get; set; }
-
-        public ICollection<Photo> Photos { get; set; }
     }
 }

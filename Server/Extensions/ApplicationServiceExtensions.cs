@@ -6,6 +6,7 @@ using Server.Application.Activities;
 using Server.Infrastructure.Security;
 using Server.Models;
 using Server.Application.Interfaces;
+using Server.Infrastructure.Photos;
 
 namespace Server.Extensions
 {
@@ -31,6 +32,8 @@ namespace Server.Extensions
             services.AddValidatorsFromAssemblyContaining<Create>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddScoped<IPhotoAccessor, PhotoAccessor>();
+            services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
 
             return services;
         }

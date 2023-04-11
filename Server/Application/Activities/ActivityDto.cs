@@ -25,6 +25,6 @@ namespace Server.Application.Activities
 
         public bool isCancelled { get; set; }
 
-        public ICollection<ProfileDto> Attendees { get; set; }
+        public ICollection<AttendeeDto> Attendees { get; set; }
     }
 }
