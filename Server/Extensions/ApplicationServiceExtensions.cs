@@ -22,7 +22,11 @@ namespace Server.Extensions
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod(); // Replace this line to allow specific methods
+                    policy
+                    .WithOrigins("http://localhost:3000")
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                    .AllowAnyMethod(); // Replace this line to allow specific methods
                 });
             });
 
@@ -34,6 +38,7 @@ namespace Server.Extensions
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
+            services.AddSignalR();
 
             return services;
         }

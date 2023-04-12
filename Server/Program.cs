@@ -6,6 +6,7 @@ using Server.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Server.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,9 @@ app.UseAuthorization();
 
 // Add this line
 app.MapControllers();
+app.MapHub<ChatHub>("/chat");
+
+
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try

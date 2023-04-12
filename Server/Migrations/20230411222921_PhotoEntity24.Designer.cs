@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Models;
 
@@ -10,9 +11,10 @@ using Server.Models;
 namespace Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230411222921_PhotoEntity24")]
+    partial class PhotoEntity24
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -317,21 +319,6 @@ namespace Server.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("Server.Models.UserFollowing", b =>
-                {
-                    b.Property<string>("ObserverId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<string>("TargetId")
-                        .HasColumnType("varchar(255)");
-
-                    b.HasKey("ObserverId", "TargetId");
-
-                    b.HasIndex("TargetId");
-
-                    b.ToTable("UserFollowings");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -426,25 +413,6 @@ namespace Server.Migrations
                         .HasForeignKey("AppUserId");
                 });
 
-            modelBuilder.Entity("Server.Models.UserFollowing", b =>
-                {
-                    b.HasOne("Server.Models.AppUser", "Observer")
-                        .WithMany("Followings")
-                        .HasForeignKey("ObserverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Server.Models.AppUser", "Target")
-                        .WithMany("Followers")
-                        .HasForeignKey("TargetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Observer");
-
-                    b.Navigation("Target");
-                });
-
             modelBuilder.Entity("Server.Models.Activity", b =>
                 {
                     b.Navigation("Attendees");
@@ -455,10 +423,6 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.Models.AppUser", b =>
                 {
                     b.Navigation("Activities");
-
-                    b.Navigation("Followers");
-
-                    b.Navigation("Followings");
 
                     b.Navigation("Photos");
                 });

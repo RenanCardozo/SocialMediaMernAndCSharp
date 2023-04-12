@@ -16,7 +16,7 @@ export default class UserStore {
         return !!this.user;
     }
 
-    
+
     login = async (creds: UserFormValues) => {
         try {
             const user = await agent.Account.login(creds);
@@ -50,20 +50,26 @@ export default class UserStore {
 
     logout = () => {
         store.commonStore.setToken(null);
+
         this.user = null;
+        
         router.navigate("/");
     }
 
-    getUser = async () =>{
-        try{
+    getUser = async () => {
+        try {
             const user = await agent.Account.current();
             runInAction(() => this.user = user);
-        }catch(error){
+        } catch (error) {
             console.log(error); // Debug: log the error
         }
     }
 
-    setImage = (image: string) =>{
-        if(this.user) this.user.image = image;
+    setImage = (image: string) => {
+        if (this.user) this.user.image = image;
+    }
+
+    setDisplayName = (name: string) => {
+        if (this.user) this.user.displayName = name;
     }
 }

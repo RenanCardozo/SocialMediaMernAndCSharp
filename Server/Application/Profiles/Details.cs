@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.Application.Core;
+using Server.Application.Interfaces;
 using Server.Models;
 
 namespace Server.Application.Profiles
@@ -19,18 +20,20 @@ namespace Server.Application.Profiles
 
             private readonly IMapper _mapper;
             private readonly DataContext _context;
+            private readonly IUserAccessor _userAccessor;
 
-            public Handler(DataContext context, IMapper mapper)
+            public Handler(DataContext context, IMapper mapper, IUserAccessor userAccessor)
             {
                 _context = context;
                 _mapper = mapper;
+                _userAccessor = userAccessor;
             }
 
 
             public async Task<Result<ProfileDto>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var user = await _context.Users
-                    .ProjectTo<ProfileDto>(_mapper.ConfigurationProvider)
+                    .ProjectTo<ProfileDto>(_mapper.ConfigurationProvider, new {currentUsername = _userAccessor.GetUserName()})
                     .SingleOrDefaultAsync(u => u.Username == request.Username);
 
                 if(user == null) return null;
