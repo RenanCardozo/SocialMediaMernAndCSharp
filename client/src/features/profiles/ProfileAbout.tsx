@@ -7,24 +7,38 @@ export default observer(function ProfileAbout() {
     const { profileStore } = useStore();
     const { isCurrentUser, profile } = profileStore;
     const [editMode, setEditMode] = useState(false);
+    
+    const handleEditMode = () => {
+        setEditMode(!editMode);
+    };
+
+    const renderProfileContent = () => {
+        return editMode ? (
+            <ProfileEditForm setEditMode={setEditMode} />
+        ) : (
+            <span style={{ whiteSpace: "pre-wrap" }}>{profile?.bio}</span>
+        );
+    };
+
     return (
         <Tab.Pane>
             <Grid>
-                <Grid.Column width='16'>
-                    <Header floated='left' icon='user' content={`${profile?.displayName}'s Bio:`} />
+                <Grid.Column width="16">
+                    <Header
+                        floated="left"
+                        icon="user"
+                        content={`${profile?.displayName}'s Bio:`}
+                    />
                     {isCurrentUser && (
                         <Button
-                            floated='right'
+                            floated="right"
                             basic
-                            content={editMode ? 'Cancel' : 'Edit Profile'}
-                            onClick={() => setEditMode(!editMode)}
+                            content={editMode ? "Cancel" : "Edit Profile"}
+                            onClick={handleEditMode}
                         />
                     )}
                 </Grid.Column>
-                <Grid.Column width='16'>
-                    {editMode ? <ProfileEditForm setEditMode={setEditMode} /> :
-                        <span style={{ whiteSpace: 'pre-wrap' }}>{profile?.bio}</span>}
-                </Grid.Column>
+                <Grid.Column width="16">{renderProfileContent()}</Grid.Column>
             </Grid>
         </Tab.Pane>
     )
