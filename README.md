@@ -23,7 +23,7 @@ https://user-images.githubusercontent.com/75766846/231776774-50dd515c-7d68-41fb-
 - [node.js] - evented I/O for the backend
 - [C#] - Object-oriented nature makes it perfect for developing websites that boast high efficiency and are easily scalable
 - [Formik] - Forms Made easier to maintain
-- [SignalR] - sockets.io for live chat
+- [SignalR] - WebSockets for live chat
 - [Mobx] - State management to keep code clean and maintainable!
 
 ## Installation
