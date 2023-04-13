@@ -19,17 +19,17 @@ https://user-images.githubusercontent.com/75766846/231776774-50dd515c-7d68-41fb-
 
 ## Tech
 
-- [React] - HTML enhanced for web apps!
-- [Semantic UI] - Great UI boilerplate for modern web apps
-- [Formik] - Simplified form management and maintenance
-- [Mobx] - State management for clean and maintainable code!
-- [Date-fns] - Modern JavaScript date utility library
-- [Cloudinary] - Cloud-based image and video management platform
-- [SignalR] - Real-time web functionality for live chats and seamless communication
-- [Identity] - Authentication and user management
-- [JWT] - JSON Web Tokens for secure authorization
-- [C#] - Backend development with high efficiency and scalability
-- [Node.js] - Evented I/O for the backend
+- React: HTML enhanced for web apps!
+- Semantic UI: Great UI boilerplate for modern web apps
+- Formik: Simplified form management and maintenance
+- Mobx: State management for clean and maintainable code!
+- Date-fns: Modern JavaScript date utility library
+- Cloudinary: Cloud-based image and video management platform
+- SignalR: Real-time web functionality for live chats and seamless communication
+- Identity: Authentication and user management
+- JWT: JSON Web Tokens for secure authorization
+- C#: Backend development with high efficiency and scalability
+- Node.js: Evented I/O for the backend
 
 ## Installation
 
