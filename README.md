@@ -35,7 +35,7 @@ Install the dependencies and devDependencies and start the server.
 ```sh
 cd client
 npm i
-node app
+node start
 ```
 
 
