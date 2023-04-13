@@ -1,5 +1,5 @@
 # Social Media Website
-## _Connect, Engage, and Socialize_ ,
+## _Connect, Engage, and Socialize_ 
 
 
 
